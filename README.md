@@ -2,7 +2,6 @@
 ### An Agentic AI Assistant for Customer Acquisition, Digital Adoption & Engagement
 **Built for: SBI Hackathon @ GFF 2026**
 
----
 
 ## 1. The Problem (In Simple Words)
 
