@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Users, Building2, Globe, Quote } from 'lucide-react';
+import { useAuth } from '@/app/lib/auth-context';
+import { api } from '@/app/lib/api-client';
 
 function AnimatedCounter({ value }: { value: number }) {
   const [count, setCount] = useState(0);
@@ -41,11 +43,11 @@ const columns = [
     title: 'For Customers',
     color: '#00C896',
     points: [
-      'Zero banking app fatigue — chat on WhatsApp or YONO',
+      'Zero banking app fatigue \u2014 chat on WhatsApp or YONO',
       'Explained recommendations with risk/reward breakdown',
-      'One-tap execution — no OTPs, no forms, no friction',
+      'One-tap execution \u2014 no OTPs, no forms, no friction',
       'Full control: opt in, opt out, delete data anytime',
-      'Personal Audit Log — every action tracked & transparent',
+      'Personal Audit Log \u2014 every action tracked & transparent',
     ],
   },
   {
@@ -54,9 +56,9 @@ const columns = [
     color: '#4F8EF7',
     points: [
       '3x digital adoption through conversational interface',
-      'Reduced branch footfall — 80% queries resolved via chat',
+      'Reduced branch footfall \u2014 80% queries resolved via chat',
       'Higher FD/investment conversion with frictionless execution',
-      'Consent-first architecture — fully compliant with upcoming DPDP Act',
+      'Consent-first architecture \u2014 fully compliant with upcoming DPDP Act',
       'Reusable agent framework for any banking product line',
     ],
   },
@@ -68,13 +70,23 @@ const columns = [
       'Financial inclusion for 500M+ smartphone users',
       'Local language support via LLM fine-tuning planned',
       'First consent-first banking AI at national scale',
-      'Open API architecture — interoperable with Account Aggregator',
+      'Open API architecture \u2014 interoperable with Account Aggregator',
       'Sets a new standard for ethical AI in Indian banking',
     ],
   },
 ];
 
 export default function Impact() {
+  const { user } = useAuth();
+  const [auditCount, setAuditCount] = useState(0);
+
+  useEffect(() => {
+    if (!user) return;
+    api.getAuditLogs().then((data) => {
+      setAuditCount(data.logs.length);
+    }).catch(() => {});
+  }, [user]);
+
   return (
     <div className="py-24 px-6 max-w-6xl mx-auto">
       <motion.div
@@ -111,9 +123,11 @@ export default function Impact() {
           </div>
           <div>
             <div className="text-3xl md:text-4xl font-bold text-[#F0F4FF] mb-1">
-              ₹0
+              {user ? `${auditCount}` : '\u20B90'}
             </div>
-            <div className="text-[#8892A4] text-sm">Branch visits needed</div>
+            <div className="text-[#8892A4] text-sm">
+              {user ? 'Audit log entries' : 'Branch visits needed'}
+            </div>
           </div>
         </div>
       </motion.div>
@@ -159,7 +173,7 @@ export default function Impact() {
           &ldquo;The first AI that asks permission before it helps.&rdquo;
         </blockquote>
         <div className="text-[#8892A4] text-sm">
-          — Money Co-Pilot, SBI Hackathon @ GFF 2026
+          \u2014 Money Co-Pilot, SBI Hackathon @ GFF 2026
         </div>
       </motion.div>
     </div>

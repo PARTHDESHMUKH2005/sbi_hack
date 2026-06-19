@@ -2,12 +2,38 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { ArrowRight, Lock, Mail, User, Eye, EyeOff, CheckCircle } from 'lucide-react';
 import { useState } from 'react';
+import { useAuth } from '@/app/lib/auth-context';
+import { api } from '@/app/lib/api-client';
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
   const [agreed, setAgreed] = useState(false);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const { login } = useAuth();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!agreed) return;
+    setError('');
+    setLoading(true);
+    try {
+      const data = await api.signup({ name, email, password });
+      login(data.token, data.user as { id: string; name: string; email: string });
+      router.push('/demo');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Sign up failed');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center py-24 px-6">
@@ -26,7 +52,7 @@ export default function SignUp() {
           </p>
         </div>
 
-        <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+        <form className="space-y-5" onSubmit={handleSubmit}>
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-[#8892A4] mb-1.5">
               Full Name
@@ -36,7 +62,10 @@ export default function SignUp() {
               <input
                 id="name"
                 type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 placeholder="Parth Deshmukh"
+                required
                 className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] rounded-xl pl-10 pr-4 py-3 text-sm text-[#F0F4FF] placeholder:text-[#8892A4]/60 focus:outline-none focus:border-[#00C896]/50 focus:ring-1 focus:ring-[#00C896]/20 transition-all"
               />
             </div>
@@ -51,7 +80,10 @@ export default function SignUp() {
               <input
                 id="email"
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@sbi.co.in"
+                required
                 className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] rounded-xl pl-10 pr-4 py-3 text-sm text-[#F0F4FF] placeholder:text-[#8892A4]/60 focus:outline-none focus:border-[#00C896]/50 focus:ring-1 focus:ring-[#00C896]/20 transition-all"
               />
             </div>
@@ -66,7 +98,11 @@ export default function SignUp() {
               <input
                 id="password"
                 type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="Create a strong password"
+                required
+                minLength={6}
                 className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] rounded-xl pl-10 pr-10 py-3 text-sm text-[#F0F4FF] placeholder:text-[#8892A4]/60 focus:outline-none focus:border-[#00C896]/50 focus:ring-1 focus:ring-[#00C896]/20 transition-all"
               />
               <button
@@ -79,6 +115,12 @@ export default function SignUp() {
             </div>
           </div>
 
+          {error && (
+            <div className="text-red-400 text-sm text-center bg-red-400/10 rounded-xl py-2">
+              {error}
+            </div>
+          )}
+
           <div className="glass rounded-xl p-4 text-xs text-[#8892A4] space-y-2">
             <p className="font-medium text-[#F0F4FF]">Consent-First — by default</p>
             <label className="flex items-start gap-3 cursor-pointer">
@@ -89,9 +131,9 @@ export default function SignUp() {
                 className="mt-0.5 w-4 h-4 rounded border-[rgba(255,255,255,0.15)] bg-transparent accent-[#00C896]"
               />
               <span>
-                I agree to the{" "}
+                I agree to the{' '}
                 <button type="button" className="text-[#4F8EF7] hover:underline">Terms of Service</button>
-                {" "}and{" "}
+                {' '}and{' '}
                 <button type="button" className="text-[#4F8EF7] hover:underline">Privacy Policy</button>.
                 I understand I can revoke any permission at any time.
               </span>
@@ -99,17 +141,17 @@ export default function SignUp() {
           </div>
 
           <motion.button
-            whileHover={agreed ? { scale: 1.01 } : {}}
-            whileTap={agreed ? { scale: 0.99 } : {}}
+            whileHover={agreed && !loading ? { scale: 1.01 } : {}}
+            whileTap={agreed && !loading ? { scale: 0.99 } : {}}
             type="submit"
-            disabled={!agreed}
+            disabled={!agreed || loading}
             className={`w-full font-semibold py-3 rounded-xl transition-all flex items-center justify-center gap-2 ${
               agreed
-                ? 'bg-[#00C896] text-[#0A0F1E] hover:bg-[#00b086] shadow-lg shadow-[#00C896]/20 cursor-pointer'
+                ? 'bg-[#00C896] text-[#0A0F1E] hover:bg-[#00b086] shadow-lg shadow-[#00C896]/20 cursor-pointer disabled:opacity-60'
                 : 'bg-[rgba(255,255,255,0.06)] text-[#8892A4] cursor-not-allowed'
             }`}
           >
-            {agreed ? (
+            {loading ? 'Creating account...' : agreed ? (
               <>
                 Create Account
                 <ArrowRight size={18} />

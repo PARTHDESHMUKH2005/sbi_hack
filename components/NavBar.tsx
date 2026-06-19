@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useAuth } from '@/app/lib/auth-context';
 
 const links = [
   { href: '/', label: 'Home' },
@@ -13,6 +14,7 @@ const links = [
 
 export default function NavBar() {
   const pathname = usePathname();
+  const { user, logout } = useAuth();
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0A0F1E]/90 backdrop-blur-md border-b border-[rgba(255,255,255,0.06)]">
@@ -38,22 +40,36 @@ export default function NavBar() {
         </div>
 
         <div className="flex items-center gap-3">
-          <Link
-            href="/signin"
-            className={`text-sm transition-all duration-200 ${
-              pathname === '/signin'
-                ? 'text-[#00C896] font-medium'
-                : 'text-[#8892A4] hover:text-[#F0F4FF]'
-            }`}
-          >
-            Sign In
-          </Link>
-          <Link
-            href="/signup"
-            className="text-sm font-semibold bg-[#00C896] text-[#0A0F1E] px-4 py-1.5 rounded-full hover:bg-[#00b086] transition-all"
-          >
-            Sign Up
-          </Link>
+          {user ? (
+            <>
+              <span className="hidden sm:block text-xs text-[#8892A4]">{user.name}</span>
+              <button
+                onClick={logout}
+                className="text-sm text-[#8892A4] hover:text-[#f87171] transition-colors"
+              >
+                Sign Out
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/signin"
+                className={`text-sm transition-all duration-200 ${
+                  pathname === '/signin'
+                    ? 'text-[#00C896] font-medium'
+                    : 'text-[#8892A4] hover:text-[#F0F4FF]'
+                }`}
+              >
+                Sign In
+              </Link>
+              <Link
+                href="/signup"
+                className="text-sm font-semibold bg-[#00C896] text-[#0A0F1E] px-4 py-1.5 rounded-full hover:bg-[#00b086] transition-all"
+              >
+                Sign Up
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </nav>
