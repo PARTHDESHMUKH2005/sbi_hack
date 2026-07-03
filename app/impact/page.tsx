@@ -173,7 +173,7 @@ export default function Impact() {
           &ldquo;The first AI that asks permission before it helps.&rdquo;
         </blockquote>
         <div className="text-[#8892A4] text-sm">
-          \u2014 Money Co-Pilot, SBI Hackathon @ GFF 2026
+          2014 Money Co-Pilot, SBI Hackathon @ GFF 2026
         </div>
       </motion.div>
     </div>
