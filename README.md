@@ -298,7 +298,7 @@ JUDGING CRITERION          OUR ANSWER
 
 <div align="center">
 
-## 🌐 [sbi-hack.vercel.app](https://sbi-hack.vercel.app)
+## 🌐 [sbi-hack.vercel-81.app](https://sbi-hack.vercel.app)
 
 *Money Co-Pilot — Consent-first AI banking for 500M+ SBI customers.*  
 *SBI Hackathon @ Global Fintech Fest 2026*
