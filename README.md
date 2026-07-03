@@ -222,6 +222,7 @@ Customer opts in → picks what AI can see → AI flags opportunities
 ![SBI API](https://img.shields.io/badge/SBI_Core_Banking_API-00529B?style=flat-square)
 ![UPI](https://img.shields.io/badge/UPI_Rails-8B44AC?style=flat-square)
 ![BSE](https://img.shields.io/badge/BSE_StAR_MF_API-003087?style=flat-square)
+TYPESCRIPT
 
 ### 🔒 Compliance & Infra
 ![DPDP](https://img.shields.io/badge/DPDP_Act_2023-10b981?style=flat-square)
