@@ -185,7 +185,7 @@ export default function Tech() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-[#4F8EF7]/20 border border-[#4F8EF7]/30 flex items-center justify-center text-sm font-bold text-[#4F8EF7]">
-              PD
+              M
             </div>
             <div className="text-left">
               <div className="text-sm font-medium text-[#F0F4FF]">Team Money Co-Pilot</div>
