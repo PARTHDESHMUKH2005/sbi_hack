@@ -194,21 +194,18 @@ export default function Tech() {
           </div>
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-[#00C896]/20 border border-[#00C896]/30 flex items-center justify-center text-sm font-bold text-[#00C896]">
-              PD
+              M
             </div>
             <div className="text-left">
-              <div className="text-sm font-medium text-[#F0F4FF]">Parth Deshmukh</div>
-              <div className="text-xs text-[#8892A4]">Full Stack Developer</div>
+              <div className="text-sm font-medium text-[#F0F4FF]">Parth Mahesh Deshmukh</div>
+              <div className="text-sm font-medium text-[#F0F4FF]">Abhishek Chopra</div>
+              <div className="text-sm font-medium text-[#F0F4FF]">Sagarika Wankhede</div>
+              <div className="text-sm font-medium text-[#F0F4FF]">Jaskaran Singh Bedi</div>
+              
             </div>
           </div>
         </div>
-        <motion.button
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className="mt-8 bg-[#00C896] text-[#0A0F1E] font-semibold px-8 py-3 rounded-full hover:bg-[#00b086] transition-all shadow-lg shadow-[#00C896]/25"
-        >
-          View Full Proposal
-        </motion.button>
+        
       </motion.div>
     </div>
   );
