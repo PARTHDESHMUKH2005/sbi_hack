@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle, ArrowRight, RotateCcw, Send, MessageSquare, Settings } from 'lucide-react';
+import { CheckCircle, ArrowRight, RotateCcw } from 'lucide-react';
 import { useAuth } from '@/app/lib/auth-context';
 import { api } from '@/app/lib/api-client';
 
@@ -173,17 +173,12 @@ export default function DemoPage() {
   const [confirmed, setConfirmed] = useState(false);
   const [showTyping, setShowTyping] = useState(false);
   const [txnId, setTxnId] = useState('');
-  const [liveMode, setLiveMode] = useState(false);
-  const [liveInput, setLiveInput] = useState('');
-  const [liveMessages, setLiveMessages] = useState<{ role: string; content: string }[]>([]);
-  const [liveConvId, setLiveConvId] = useState<string | undefined>();
-  const [liveLoading, setLiveLoading] = useState(false);
   const [syncing, setSyncing] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [liveMessages, step]);
+  }, [step]);
 
   useEffect(() => {
     if (!user) return;
@@ -246,25 +241,6 @@ export default function DemoPage() {
     setTxnId('');
   };
 
-  const sendLiveMessage = async () => {
-    if (!liveInput.trim() || liveLoading) return;
-    const msg = liveInput.trim();
-    setLiveInput('');
-    setLiveMessages((prev) => [...prev, { role: 'user', content: msg }]);
-    setLiveLoading(true);
-    try {
-      const data = await api.chat({ message: msg, conversation_id: liveConvId });
-      setLiveConvId(data.conversation_id);
-      setTimeout(() => {
-        setLiveMessages((prev) => [...prev, { role: 'agent', content: data.reply }]);
-        setLiveLoading(false);
-      }, 1000);
-    } catch {
-      setLiveMessages((prev) => [...prev, { role: 'agent', content: 'Sorry, something went wrong. Please try again.' }]);
-      setLiveLoading(false);
-    }
-  };
-
   const visibleMessages: { role: Message['role']; content: string }[] = [];
   const maxMsgIndex = step === 5 ? 6 : step === 4 ? 5 : step === 3 ? 4 : step === 2 ? 3 : step === 1 ? 2 : 1;
 
@@ -292,27 +268,6 @@ export default function DemoPage() {
       >
         Every action starts with your permission. Toggle features on/off and watch the agent adapt.
       </motion.p>
-
-      <div className="flex justify-center gap-3 mb-8">
-        <button
-          onClick={() => setLiveMode(false)}
-          className={`text-sm px-4 py-2 rounded-full transition-all flex items-center gap-2 ${
-            !liveMode ? 'bg-[#00C896] text-[#0A0F1E] font-medium' : 'glass text-[#8892A4] hover:text-[#F0F4FF]'
-          }`}
-        >
-          <MessageSquare size={14} />
-          Scripted Demo
-        </button>
-        <button
-          onClick={() => setLiveMode(true)}
-          className={`text-sm px-4 py-2 rounded-full transition-all flex items-center gap-2 ${
-            liveMode ? 'bg-[#00C896] text-[#0A0F1E] font-medium' : 'glass text-[#8892A4] hover:text-[#F0F4FF]'
-          }`}
-        >
-          <Settings size={14} />
-          Live Chat
-        </button>
-      </div>
 
       <div className="flex flex-col lg:flex-row gap-8">
         <motion.div
@@ -362,37 +317,12 @@ export default function DemoPage() {
               <div>
                 <div className="text-sm font-semibold text-[#e9edef]">Money Co-Pilot</div>
                 <div className="text-xs text-[#00C896]">
-                  {liveMode ? 'Live mode' : 'Demo mode'}
+                  Demo mode
                 </div>
               </div>
             </div>
 
-            {liveMode ? (
-              <div className="bg-[#0b141a] h-[500px] p-4 flex flex-col gap-3 overflow-y-auto">
-                {liveMessages.length === 0 && (
-                  <div className="flex-1 flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="text-5xl mb-4">💬</div>
-                      <p className="text-[#8892A4] text-sm">
-                        Type a message to chat with the live agent
-                      </p>
-                    </div>
-                  </div>
-                )}
-                <AnimatePresence mode="popLayout">
-                  {liveMessages.map((msg, i) => (
-                    <ChatMessage
-                      key={`live-${i}`}
-                      msg={{ role: msg.role as 'user' | 'agent', content: msg.content }}
-                      index={i}
-                    />
-                  ))}
-                  {liveLoading && <TypingIndicator />}
-                </AnimatePresence>
-                <div ref={chatEndRef} />
-              </div>
-            ) : (
-              <div className="bg-[#0b141a] h-[500px] p-4 flex flex-col gap-3 overflow-y-auto">
+            <div className="bg-[#0b141a] h-[500px] p-4 flex flex-col gap-3 overflow-y-auto">
                 <AnimatePresence mode="popLayout">
                   {step > 0 && visibleMessages.slice(0, maxMsgIndex).map((msg, i) => (
                     <ChatMessage key={`msg-${i}`} msg={msg} index={i} />
@@ -427,27 +357,7 @@ export default function DemoPage() {
                   </div>
                 )}
               </div>
-            )}
 
-            {liveMode ? (
-              <div className="bg-[#1f2c33] px-4 py-3 border-t border-[#313d45] flex items-center gap-3">
-                <input
-                  type="text"
-                  value={liveInput}
-                  onChange={(e) => setLiveInput(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && sendLiveMessage()}
-                  placeholder="Type a message..."
-                  className="flex-1 bg-[#2a3942] rounded-lg px-4 py-2 text-sm text-[#e9edef] placeholder:text-[#8892A4] focus:outline-none focus:ring-1 focus:ring-[#00C896]/30"
-                />
-                <button
-                  onClick={sendLiveMessage}
-                  disabled={!liveInput.trim() || liveLoading}
-                  className="bg-[#00C896] text-[#0A0F1E] p-2 rounded-lg hover:bg-[#00b086] transition-all disabled:opacity-40"
-                >
-                  <Send size={16} />
-                </button>
-              </div>
-            ) : (
               <div className="bg-[#1f2c33] px-4 py-3 border-t border-[#313d45] flex items-center gap-3">
                 <div className="flex-1 bg-[#2a3942] rounded-lg px-4 py-2 text-sm text-[#8892A4]">
                   {step === 0
@@ -469,7 +379,6 @@ export default function DemoPage() {
                   {nextLabel}
                 </button>
               </div>
-            )}
           </div>
         </motion.div>
       </div>
