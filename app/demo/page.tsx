@@ -33,7 +33,7 @@ const fullMessages: { role: Message['role']; content: string }[] = [
   { role: 'user', content: 'Yes, what do you recommend?' },
   { role: 'agent', content: 'Based on your risk profile and goals, I recommend:\n\n\u2022 SBI Bluechip Fund \u2014 \u20b920,000\n\u2022 SBI Nifty Index Fund \u2014 \u20b910,000\n\u2022 SBI Fixed Deposit \u2014 \u20b95,000\n\n**Total: \u20b935,000**\n\nShall I proceed with this investment plan?' },
   { role: 'confirm', content: '' },
-  { role: 'success', content: '' },
+  { role: 'success', content: 'Investment of ₹35,000 confirmed!' },
 ];
 
 function TypingIndicator() {
@@ -69,20 +69,20 @@ function ChatMessage({ msg, index }: { msg: Message; index: number }) {
         <div className="text-xs text-[#e9edef] space-y-1">
           <div className="flex justify-between">
             <span>SBI Bluechip Fund</span>
-            <span>\u20b920,000</span>
-          </div>
-          <div className="flex justify-between">
-            <span>SBI Nifty Index Fund</span>
-            <span>\u20b910,000</span>
-          </div>
-          <div className="flex justify-between">
-            <span>SBI Fixed Deposit</span>
-            <span>\u20b95,000</span>
-          </div>
-          <div className="border-t border-[rgba(255,255,255,0.1)] pt-1 mt-1 flex justify-between font-bold">
-            <span>Total</span>
-            <span>\u20b935,000</span>
-          </div>
+          <span>₹20,000</span>
+           </div>
+           <div className="flex justify-between">
+             <span>SBI Nifty Index Fund</span>
+             <span>₹10,000</span>
+           </div>
+           <div className="flex justify-between">
+             <span>SBI Fixed Deposit</span>
+             <span>₹5,000</span>
+           </div>
+           <div className="border-t border-[rgba(255,255,255,0.1)] pt-1 mt-1 flex justify-between font-bold">
+             <span>Total</span>
+             <span>₹35,000</span>
+           </div>
         </div>
       </motion.div>
     );
