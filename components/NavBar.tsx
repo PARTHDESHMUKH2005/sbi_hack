@@ -20,7 +20,7 @@ export default function NavBar() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0A0F1E]/90 backdrop-blur-md border-b border-[rgba(255,255,255,0.06)]">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 text-lg font-bold text-[#F0F4FF] hover:text-[#00C896] transition-colors shrink-0">
-          <span>💰 Money Co-Pilot</span>
+          <span>Money Co-Pilot</span>
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
