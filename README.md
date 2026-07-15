@@ -290,7 +290,7 @@ JUDGING CRITERION          OUR ANSWER
 
 | Name |
 |------|
-| Parth Deshmukh |
+| Parth Mahesh Deshmukh |
 | Abhishek Chopra |
 | Sagarika Wankhede | 
 | Jaskaran Singh Bedi | 
