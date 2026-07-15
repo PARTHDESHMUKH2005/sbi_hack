@@ -161,7 +161,7 @@ Customer opts in → picks what AI can see → AI flags opportunities
 │                                                      │
 │  --- 2 weeks later ---                               │
 │                                                      │
-│  🤖 Agent: "Hey Priya, ₹35,000 has been              │
+│  🤖 Agent: "Hey Parth, ₹35,000 has been              │
 │     sitting idle for 3 weeks.                        │
 │     Want me to suggest something,                    │
 │     or should I leave it alone?"                     │
