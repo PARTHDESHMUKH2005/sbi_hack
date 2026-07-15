@@ -141,7 +141,7 @@ Customer opts in → picks what AI can see → AI flags opportunities
 │  💬 Money Co-Pilot  ●  WhatsApp / YONO               │
 ├──────────────────────────────────────────────────────┤
 │                                                      │
-│  Priya: "I just got a ₹50,000 bonus.                 │
+│  Parth: "I just got a ₹50,000 bonus.                 │
 │          What should I do with it?"                  │
 │                                                      │
 │  🤖 Agent: "You could split it —                     │
@@ -153,7 +153,7 @@ Customer opts in → picks what AI can see → AI flags opportunities
 │                                                      │
 │     [ ✔ Start the FD ]   [ ✕ Ignore ]                │
 │                                                      │
-│  Priya: taps ✔ Start the FD                          │
+│  Parth: taps ✔ Start the FD                          │
 │                                                      │
 │  🤖 Agent: "Done. ₹30,000 FD booked at 7.1%          │
 │     for 1 year. Matures July 2, 2027.                │
@@ -166,7 +166,7 @@ Customer opts in → picks what AI can see → AI flags opportunities
 │     Want me to suggest something,                    │
 │     or should I leave it alone?"                     │
 │                                                      │
-│  Priya: "stop messaging me about my balance"         │
+│  Parth: "stop messaging me about my balance"         │
 │                                                      │
 │  🤖 Agent: "Got it — won't proactively message       │
 │     you again. You can still ask me anything."       │
