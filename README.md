@@ -10,7 +10,7 @@
 
 ### *An AI that works FOR the customer — not ON them.*
 
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-sbi--hack-81.vercel.app-00c6ff?style=for-the-badge&labelColor=0d1420)](https://sbi-hack.vercel.app)
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-sbi--hack.vercel.app-00c6ff?style=for-the-badge&labelColor=0d1420)](https://sbi-hack-81.vercel.app)
 [![GitHub](https://img.shields.io/badge/⚙_GitHub-PARTHDESHMUKH2005-7c3aed?style=for-the-badge&labelColor=0d1420)](https://github.com/PARTHDESHMUKH2005/sbi_hack)
 [![Hackathon](https://img.shields.io/badge/🏆_SBI_Hackathon-GFF_2026-10b981?style=for-the-badge&labelColor=0d1420)](https://globalfintechfest.com)
 [![Theme](https://img.shields.io/badge/Theme-Agentic_AI_%26_Emerging_Tech-f59e0b?style=for-the-badge&labelColor=0d1420)]()
