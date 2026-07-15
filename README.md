@@ -6,7 +6,7 @@
 ╩ ╩╚═╝╝╚╝╚═╝ ╩   ╚═╝╚═╝   ╩  ╩╩═╝╚═╝ ╩ 
 ```
 
-# 💰 Money Co-Pilot
+#  Money Co-Pilot
 
 ### *An AI that works FOR the customer — not ON them.*
 
