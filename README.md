@@ -204,8 +204,8 @@ Customer opts in → picks what AI can see → AI flags opportunities
 ![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black)
 
 ### 🤖 AI & Agent Orchestration
-![Claude](https://img.shields.io/badge/Claude_(Anthropic)-D97757?style=flat-square&logo=anthropic&logoColor=white)
-![OpenAI](https://img.shields.io/badge/GPT--4_(OpenAI)-412991?style=flat-square&logo=openai&logoColor=white)
+LangGraph
+LiteLLM
 ![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=flat-square&logo=langchain&logoColor=white)
 
 ### 🧠 ML & Decision Engine
